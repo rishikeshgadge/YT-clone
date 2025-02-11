@@ -1,0 +1,23 @@
+//require('dotenv').config({path:'./env'}) JUNA METHOD
+//always write database talking in try catch blocks
+//the data is allways in another continent
+//try catch and async await are must
+//---------------------------------------------------------------
+//FIRST APPROACH data in another continent async awit aprroach 
+// import { DB_NAME } from "./constant";
+// (async()=>{
+//     try {
+//         await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`)
+//         app.on("error",(error)=>{
+//             console.log(error);
+//             throw error
+//         })
+//         app.listen(process.env.PORT,()=>{
+//             console.log(`listening on ${process.env.PORT}`);
+            
+//         })
+//     } catch (error) {
+//         console.log("ERROR",error);
+//         throw err
+//     }
+// })()
