@@ -1,5 +1,5 @@
 import { asyncHandler } from "../utils/asynchandler.js";
-import { Apierror } from "../utils/Apierror.js";
+import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { apiResponse } from "../utils/ApiResponse.js";
@@ -13,7 +13,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // Validation: Ensure required fields are not empty
     if ([fullname, email, username, password].some((field) => !field?.trim())) {
-        throw new Apierror(400, "All fields (fullname, email, username, password) are required");
+        throw new ApiError(400, "All fields (fullname, email, username, password) are required");
     }
 
     // Check if user already exists
@@ -22,7 +22,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 
     if (existed) {
-        throw new Apierror(409, "User with email/username already exists");
+        throw new ApiError(409, "User with email/username already exists");
     }
 
     // Debugging: Log uploaded files
@@ -36,14 +36,14 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // Validate that avatar is provided
     if (!avatarLocalPath) {
-        throw new Apierror(400, "Avatar file is required");
+        throw new ApiError(400, "Avatar file is required");
     }
 
     // Upload avatar to Cloudinary
     console.log("🔹 Uploading avatar to Cloudinary...");
     const avatar = await uploadOnCloudinary(avatarLocalPath);
     if (!avatar || !avatar.url) {
-        throw new Apierror(500, "Failed to upload avatar to Cloudinary");
+        throw new ApiError(500, "Failed to upload avatar to Cloudinary");
     }
 
     // Upload cover image to Cloudinary (optional)
@@ -67,7 +67,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const createdUser = await User.findById(user._id).select("-password -refreshtokens");
 
     if (!createdUser) {
-        throw new Apierror(500, "Something went wrong while registering the user");
+        throw new ApiError(500, "Something went wrong while registering the user");
     }
 
     console.log("✅ User registered successfully:", createdUser);
