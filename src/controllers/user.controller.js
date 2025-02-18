@@ -26,9 +26,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     // Debugging: Log uploaded files
-    console.log("🔹 Checking Uploaded Files...");
-    console.log("Avatar:", req.files?.avatar);
-    console.log("Cover Image:", req.files?.coverImage);
+    
 
     // Extract file paths
     const avatarLocalPath = req.files?.avatar?.[0]?.path;

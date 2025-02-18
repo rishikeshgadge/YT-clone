@@ -5,11 +5,7 @@ import fs from "fs";
 // Ensure dotenv is configured
 dotenv.config();
 
-console.log("Cloudinary Config Check:", {
-    cloud_name: process.env.CLOUDINARY_API_NAME ? "✓" : "✗",
-    api_key: process.env.CLOUDINARY_API_KEY ? "✓" : "✗",
-    api_secret: process.env.CLOUDINARY_API_SECRET ? "✓" : "✗"
-});
+
 
 // Add validation for required environment variables
 const requiredEnvVars = [
