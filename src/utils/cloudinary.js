@@ -1,3 +1,5 @@
+import dotenv from "dotenv"; // Make sure this is called at the top of your file
+
 import {v2 as cloudinary} from "cloudinary"
 import fs from "fs"
 
