@@ -51,7 +51,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // Extract file paths
     const avatarLocalPath = req.files?.avatar?.[0]?.path;
-    const coverLocalFilePath = req.files?.coverImage?.[0]?.path;
+    const coverLocalFilePath = req.files?.coverimage?.[0]?.path;
 
     // Validate that avatar is provided
     if (!avatarLocalPath) {
@@ -66,17 +66,17 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     // Upload cover image to Cloudinary (optional)
-    let coverImage = null;
+    let coverimage = null;
     if (coverLocalFilePath) {
         //console.log("🔹 Uploading cover image to Cloudinary...");
-        coverImage = await uploadOnCloudinary(coverLocalFilePath);
+        coverimage = await uploadOnCloudinary(coverLocalFilePath);
     }
 
     // Create new user in database
     const user = await User.create({
         fullname,
         avatar: avatar.url,
-        coverImage: coverImage?.url || "",
+        coverImage: coverimage?.url || "",
         email,
         password,
         username: username.toLowerCase(),
